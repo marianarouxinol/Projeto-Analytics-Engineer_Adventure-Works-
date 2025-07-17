@@ -1,0 +1,137 @@
+version: 2
+
+sources:
+  - name: erp
+    database: FEA25_05
+    schema: RAW_ADVENTURE_WORKS
+    tables:
+      - name: SALES_CUSTOMER
+        description: "Clientes registrados na base de vendas"
+        columns:
+          - name: CustomerID
+            description: "Identificador único do cliente"
+          - name: PersonID
+            description: "Referência à pessoa física ou jurídica"
+          - name: StoreID
+            description: "Loja vinculada ao cliente"
+          - name: TerritoryID
+            description: "Território atribuído ao cliente"
+
+      - name: PRODUCTION_PRODUCT
+        description: "Tabela mestre de produtos fabricados"
+        columns:
+          - name: ProductID
+            description: "Identificador único do produto"
+          - name: Name
+            description: "Nome do produto"
+          - name: ProductSubcategoryID
+            description: "Subcategoria do produto"
+          - name: ProductModelID
+            description: "Modelo técnico do produto"
+
+      - name: SALES_SALESPERSON
+        description: "Informações dos vendedores"
+        columns:
+          - name: SalesPersonID
+            description: "ID único do vendedor"
+          - name: TerritoryID
+            description: "Território em que atua"
+          - name: Bonus
+            description: "Valor de bônus concedido"
+
+      - name: SALES_SALESORDERHEADER
+        description: "Pedidos realizados pelos clientes"
+        columns:
+          - name: SalesOrderID
+            description: "Código do pedido de venda"
+          - name: CustomerID
+            description: "Cliente responsável pelo pedido"
+          - name: OrderDate
+            description: "Data em que a ordem foi realizada"
+          - name: SubTotal
+            description: "Valor bruto da venda"
+          - name: TotalDue
+            description: "Valor total da venda com encargos"
+          - name: Status
+            description: "Situação atual do pedido"
+
+      - name: SALES_SALESORDERHEADERSALESREASON
+        description: "Relação entre pedidos e seus motivos comerciais"
+
+      - name: SALES_SALESREASON
+        description: "Motivos atribuídos às vendas"
+
+      - name: SALES_CREDITCARD
+        description: "Cartões de crédito utilizados nos pedidos"
+
+      - name: PERSON_ADDRESS
+        description: "Endereços registrados para os clientes"
+
+      - name: PERSON_STATEPROVINCE
+        description: "Provincias vinculadas aos endereços"
+
+      - name: PERSON_COUNTRYREGION
+        description: "Países vinculados aos estados e endereços"
+
+models:
+  - name: stg_erp__clientes
+    description: "Clientes registrados, incluindo loja, pessoa e território"
+    columns:
+      - name: id_cliente
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__produtos
+    description: "Produtos fabricados com modelo e subcategoria"
+    columns:
+      - name: id_produto
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__vendedores
+    description: "Informações sobre vendedores e território"
+    columns:
+      - name: id_vendedor
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__pedidos
+    description: "Pedidos realizados, com valores e status"
+    columns:
+      - name: id_pedido
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__motivos
+    description: "Motivos atribuídos às vendas"
+    columns:
+      - name: id_motivo
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__motivos_pedido
+    description: "Ligação entre pedidos e motivos comerciais"
+    columns:
+      - name: id_pedido
+        data_tests: [not_null]
+      - name: id_motivo
+        data_tests: [not_null]
+
+  - name: stg_erp__cartoes
+    description: "Cartões de crédito utilizados nos pedidos"
+    columns:
+      - name: id_cartao
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__enderecos
+    description: "Endereços vinculados aos clientes"
+    columns:
+      - name: id_endereco
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__provincia
+    description: "Dados das províncias e seus códigos de país"
+    columns:
+      - name: id_provincia
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__pais
+    description: "Países registrados na base geográfica"
+    columns:
+      - name: codigo_pais
+        data_tests: [unique, not_null]
