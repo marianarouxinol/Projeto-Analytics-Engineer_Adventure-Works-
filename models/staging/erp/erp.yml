@@ -143,3 +143,26 @@ sources:
             data_tests: [unique, not_null]
           - name: Name
             description: "Nome do país"
+
+
+models:
+  - name: dim_data
+    description: "Dimensão de datas com granularidade diária, trimestre, dia da semana e fim de semana."
+    columns:
+      - name: data_id
+        description: "Chave primária da data."
+        tests:
+          - not_null
+          - unique
+      - name: ano
+        description: "Ano da data."
+      - name: mes
+        description: "Mês da data."
+      - name: dia
+        description: "Dia da data."
+      - name: trimestre
+        description: "Trimestre da data."
+      - name: dia_semana
+        description: "Dia da semana."
+      - name: fim_de_semana
+        description: "Flag indicando fim de semana."
