@@ -63,6 +63,19 @@ sources:
           - name: Bonus
             description: "Valor de bônus concedido"
 
+      - name: SALES_SALESTERRITORY
+        description: "Dados de territórios comerciais disponíveis"
+        columns:
+          - name: TerritoryID
+            description: "Identificador único do território"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Nome do território comercial"
+          - name: CountryRegionCode
+            description: "Código de país associado"
+          - name: Group
+            description: "Grupo comercial regional"
+
       - name: SALES_SALESORDERHEADER
         description: "Pedidos realizados pelos clientes"
         columns:
@@ -130,89 +143,3 @@ sources:
             data_tests: [unique, not_null]
           - name: Name
             description: "Nome do país"
-
-models:
-  - name: stg_erp__clientes
-    description: "Clientes registrados, incluindo loja, pessoa e território"
-    columns:
-      - name: id_cliente
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__produtos
-    description: "Produtos fabricados com modelo e subcategoria"
-    columns:
-      - name: id_produto
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__subcategorias
-    description: "Subcategorias vinculadas aos produtos"
-    columns:
-      - name: id_subcategoria
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__categorias
-    description: "Categorias principais dos produtos"
-    columns:
-      - name: id_categoria
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__vendedores
-    description: "Informações sobre vendedores e território"
-    columns:
-      - name: id_vendedor
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__pedidos
-    description: "Pedidos realizados, com valores e status"
-    columns:
-      - name: id_pedido
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__motivos
-    description: "Motivos atribuídos às vendas"
-    columns:
-      - name: id_motivo
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__motivos_pedido
-    description: "Ligação entre pedidos e motivos comerciais"
-    columns:
-      - name: id_pedido
-        data_tests: [not_null]
-      - name: id_motivo
-        data_tests: [not_null]
-
-  - name: stg_erp__cartoes
-    description: "Cartões de crédito utilizados nos pedidos"
-    columns:
-      - name: id_cartao
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__enderecos
-    description: "Endereços vinculados aos clientes"
-    columns:
-      - name: id_endereco
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__provincia
-    description: "Dados das províncias e seus códigos de país"
-    columns:
-      - name: id_provincia
-        data_tests: [unique, not_null]
-
-  - name: stg_erp__pais
-    description: "Países registrados na base geográfica"
-    columns:
-      - name: codigo_pais
-        data_tests: [unique, not_null]
-  
-  - name: stg_erp__categorias
-    description: "Categorias principais dos produtos"
-    columns:
-    - name: id_categoria
-      description: "Identificador único da categoria"
-      tests: [not_null, unique]
-    - name: nome_categoria
-      description: "Nome da categoria"
-      tests: [not_null]
-

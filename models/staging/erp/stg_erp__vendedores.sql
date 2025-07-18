@@ -3,7 +3,8 @@ with base as (
     select
         businessentityid,
         territoryid,
-        bonus
+        bonus,
+        salesquota
     from {{ source('erp', 'SALES_SALESPERSON') }}
     where businessentityid is not null
 
@@ -22,7 +23,8 @@ renamed as (
     select
         cast(businessentityid as int)   as id_vendedor,
         cast(territoryid as int)        as id_territorio,
-        cast(bonus as numeric)          as valor_bonus
+        cast(bonus as numeric)          as valor_bonus,
+        cast(salesquota as float)       as quota_vendas
     from deduplicado
 
 )
