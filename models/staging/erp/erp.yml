@@ -10,6 +10,7 @@ sources:
         columns:
           - name: CustomerID
             description: "Identificador único do cliente"
+            data_tests: [unique, not_null]
           - name: PersonID
             description: "Referência à pessoa física ou jurídica"
           - name: StoreID
@@ -22,6 +23,7 @@ sources:
         columns:
           - name: ProductID
             description: "Identificador único do produto"
+            data_tests: [unique, not_null]
           - name: Name
             description: "Nome do produto"
           - name: ProductSubcategoryID
@@ -29,11 +31,33 @@ sources:
           - name: ProductModelID
             description: "Modelo técnico do produto"
 
+      - name: PRODUCTION_PRODUCTSUBCATEGORY
+        description: "Subcategorias de produtos disponíveis"
+        columns:
+          - name: ProductSubcategoryID
+            description: "Identificador único da subcategoria"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Nome da subcategoria"
+          - name: ProductCategoryID
+            description: "Chave que conecta à categoria do produto"
+            data_tests: [not_null]
+
+      - name: PRODUCTION_PRODUCTCATEGORY
+        description: "Categorias principais dos produtos fabricados"
+        columns:
+          - name: ProductCategoryID
+            description: "Identificador único da categoria"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Nome da categoria"
+
       - name: SALES_SALESPERSON
         description: "Informações dos vendedores"
         columns:
-          - name: SalesPersonID
+          - name: BusinessEntityID
             description: "ID único do vendedor"
+            data_tests: [unique, not_null]
           - name: TerritoryID
             description: "Território em que atua"
           - name: Bonus
@@ -44,8 +68,10 @@ sources:
         columns:
           - name: SalesOrderID
             description: "Código do pedido de venda"
+            data_tests: [unique, not_null]
           - name: CustomerID
             description: "Cliente responsável pelo pedido"
+            data_tests: [not_null]
           - name: OrderDate
             description: "Data em que a ordem foi realizada"
           - name: SubTotal
@@ -60,18 +86,50 @@ sources:
 
       - name: SALES_SALESREASON
         description: "Motivos atribuídos às vendas"
+        columns:
+          - name: SalesReasonID
+            description: "ID do motivo comercial"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Descrição do motivo"
 
       - name: SALES_CREDITCARD
         description: "Cartões de crédito utilizados nos pedidos"
+        columns:
+          - name: CreditCardID
+            description: "Identificador único do cartão"
+            data_tests: [unique, not_null]
 
       - name: PERSON_ADDRESS
         description: "Endereços registrados para os clientes"
+        columns:
+          - name: AddressID
+            description: "ID do endereço"
+            data_tests: [unique, not_null]
+          - name: AddressLine1
+            description: "Endereço principal"
+          - name: City
+            description: "Cidade"
 
       - name: PERSON_STATEPROVINCE
         description: "Provincias vinculadas aos endereços"
+        columns:
+          - name: StateProvinceID
+            description: "ID da província"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Nome da província"
+          - name: CountryRegionCode
+            description: "Código do país"
 
       - name: PERSON_COUNTRYREGION
         description: "Países vinculados aos estados e endereços"
+        columns:
+          - name: CountryRegionCode
+            description: "Código único do país"
+            data_tests: [unique, not_null]
+          - name: Name
+            description: "Nome do país"
 
 models:
   - name: stg_erp__clientes
@@ -84,6 +142,18 @@ models:
     description: "Produtos fabricados com modelo e subcategoria"
     columns:
       - name: id_produto
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__subcategorias
+    description: "Subcategorias vinculadas aos produtos"
+    columns:
+      - name: id_subcategoria
+        data_tests: [unique, not_null]
+
+  - name: stg_erp__categorias
+    description: "Categorias principais dos produtos"
+    columns:
+      - name: id_categoria
         data_tests: [unique, not_null]
 
   - name: stg_erp__vendedores
@@ -135,3 +205,14 @@ models:
     columns:
       - name: codigo_pais
         data_tests: [unique, not_null]
+  
+  - name: stg_erp__categorias
+    description: "Categorias principais dos produtos"
+    columns:
+    - name: id_categoria
+      description: "Identificador único da categoria"
+      tests: [not_null, unique]
+    - name: nome_categoria
+      description: "Nome da categoria"
+      tests: [not_null]
+
