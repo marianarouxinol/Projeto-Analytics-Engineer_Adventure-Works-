@@ -10,7 +10,15 @@ Este projeto simula a arquitetura de dados da empresa fictícia **Adventure Work
 
 O projeto segue uma modelagem estrela com uma tabela fato central e múltiplas dimensões relacionadas.
 
-![Esquema Dimensional](assets/esquema_dimensional.png)
+![Esquema Dimensional](esquema_dimensional.png)
+
+<h3 align="center">Esquema Dimensional</h3>
+
+<p align="center">
+  <img src="esquema_dimensional.jpg" alt="Esquema Dimensional" width="600"/>
+</p>
+
+<p align="center"><em>Figura 1: Representação visual do modelo dimensional utilizado no projeto.</em></p>
 ---
 
 ## 🗂️ Tabelas Utilizadas
