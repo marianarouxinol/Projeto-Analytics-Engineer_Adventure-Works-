@@ -1,5 +1,5 @@
 with
-    -- import staging models
+    
     clientes as (
         select *
         from {{ ref('stg_erp__clientes') }}
@@ -17,14 +17,14 @@ with
         from {{ ref('stg_erp__pais') }}
     ),
 
-    -- transformation
+    
     joined as (
         select
             clientes.id_cliente,
             clientes.id_pessoa,
             clientes.id_loja,
             clientes.id_territorio,
-            enderecos.linha1           as endereco,
+            enderecos.linha1           as linha1,
             enderecos.cidade,
             provincias.nome_provincia,
             paises.nome_pais

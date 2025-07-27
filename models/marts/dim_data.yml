@@ -1,0 +1,29 @@
+models:
+  - name: dim_data
+    description: >
+      Dimensão temporal gerada sinteticamente para representar datas entre 2015 e 2025.
+      Possui atributos derivados como dia da semana, trimestre, e indicador de fim de semana.
+    columns:
+      - name: data_id
+        description: Chave primária da dimensão temporal.
+        tests:
+          - unique
+          - not_null
+
+      - name: ano
+        description: Ano da data.
+
+      - name: mes
+        description: Mês da data.
+
+      - name: dia
+        description: Dia do mês.
+
+      - name: trimestre
+        description: Trimestre referente à data.
+
+      - name: dia_semana
+        description: Nome do dia da semana.
+
+      - name: fim_de_semana
+        description: Indica se a data é sábado ou domingo.

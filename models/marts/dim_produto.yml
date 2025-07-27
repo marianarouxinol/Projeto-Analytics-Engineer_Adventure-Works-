@@ -1,0 +1,29 @@
+models:
+  - name: dim_produto
+    description: >
+      Dimensão de produtos vendidos com atributos como nome, linha, classe e subcategoria.
+      Ideal para análise de mix, estoque e popularidade de itens.
+    columns:
+      - name: id_produto
+        description: Identificador único do produto.
+        tests:
+          - unique
+          - not_null
+
+      - name: nome_produto
+        description: Nome completo do produto.
+
+      - name: linha_produto
+        description: Linha comercial do produto.
+
+      - name: classe_produto
+        description: Classificação técnica ou comercial do item.
+
+      - name: id_subcategoria
+        description: Subcategoria de produto vinculada.
+
+      - name: nome_subcategoria
+        description: Nome da subcategoria.
+
+      - name: nome_categoria
+        description: Nome da categoria principal.

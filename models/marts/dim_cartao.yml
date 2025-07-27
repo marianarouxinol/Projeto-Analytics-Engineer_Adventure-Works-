@@ -1,0 +1,20 @@
+models:
+  - name: dim_cartao
+    description: >
+      Dimensão de cartões de crédito utilizados nos pedidos.
+      Inclui tipo do cartão e data de expiração formatada.
+    columns:
+      - name: id_cartao
+        description: Identificador único do cartão.
+        tests:
+          - unique
+          - not_null
+
+      - name: tipo_cartao
+        description: Bandeira ou tipo do cartão.
+
+      - name: mes_expiracao
+        description: Mês de validade do cartão.
+
+      - name: ano_expiracao
+        description: Ano de validade do cartão.

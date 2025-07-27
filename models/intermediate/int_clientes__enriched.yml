@@ -1,0 +1,32 @@
+models:
+  - name: int_clientes__enriched
+    description: >
+      Modelo intermediário que enriquece os dados de clientes com suas informações de endereço,
+      estado, país e território comercial. Serve como base para a dimensão de cliente e para a fato.
+    columns:
+      - name: id_cliente
+        description: Identificador único do cliente.
+        tests:
+          - unique
+          - not_null
+
+      - name: id_pessoa
+        description: Identificador da pessoa vinculada ao cliente.
+
+      - name: id_loja
+        description: Loja responsável pelo cliente.
+
+      - name: id_territorio
+        description: Território comercial do cliente.
+
+      - name: linha1
+        description: Logradouro principal do endereço do cliente.
+
+      - name: cidade
+        description: Cidade de residência do cliente.
+
+      - name: nome_provincia
+        description: Estado ou província do cliente.
+
+      - name: nome_pais
+        description: País de localização do cliente.

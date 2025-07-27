@@ -1,0 +1,26 @@
+models:
+  - name: dim_vendedor
+    description: >
+      Dimensão de vendedores com dados pessoais e área de atuação.
+      Permite análise de performance comercial e distribuição territorial.
+    columns:
+      - name: id_vendedor
+        description: Identificador único do vendedor.
+        tests:
+          - unique
+          - not_null
+
+      - name: nome_vendedor
+        description: Nome completo do vendedor.
+
+      - name: id_territorio
+        description: Território comercial de atuação.
+
+      - name: nome_territorio
+        description: Nome do território.
+
+      - name: grupo_territorio
+        description: Agrupamento regional do território.
+
+      - name: pais
+        description: País correspondente ao território.

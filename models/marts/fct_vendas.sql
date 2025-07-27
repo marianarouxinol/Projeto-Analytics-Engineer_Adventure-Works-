@@ -1,5 +1,18 @@
-with pedidos as (
-    select * from {{ ref('stg_erp__pedidos') }}
+with vendas_detalhadas as (
+    select
+        sd.SalesOrderID                     as id_pedido,
+        cast(h.OrderDate as date)          as data_pedido,
+        extract(year from h.OrderDate)     as ano,
+        sd.ProductID,
+        sd.SpecialOfferID,
+        sd.OrderQty,
+        cast(sd.UnitPrice as numeric(20,4)) as unit_price,
+        cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty as valor_bruto,
+        cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty * (1 - sd.UnitPriceDiscount) as valor_liquido
+    from RAW_ADVENTURE_WORKS.SALES_SALESORDERDETAIL sd
+    join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
+      on sd.SalesOrderID = h.SalesOrderID
+    where extract(year from h.OrderDate) = 2011
 ),
 
 dim_cliente as (
@@ -19,12 +32,12 @@ dim_localidade as (
 )
 
 select
-    p.id_pedido,
-    p.status_pedido,
-    cast(p.data_pedido as date)                     as data_pedido,
+    v.id_pedido,
+    h.Status as status_pedido,
+    v.data_pedido,
     dc.tipo_cartao,
-    p.valor_bruto,
-    p.valor_total,
+    round(sum(v.valor_bruto), 2) as valor_bruto,
+    round(sum(v.valor_liquido), 2) as valor_liquido,
     d.ano,
     d.mes,
     d.dia,
@@ -34,10 +47,17 @@ select
     cli.cidade,
     cli.nome_provincia,
     cli.nome_pais
-from pedidos p
+from vendas_detalhadas v
+join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
+  on v.id_pedido = h.SalesOrderID
 left join dim_data d
-    on p.data_pedido = d.data_id
+    on v.data_pedido = d.data_id
 left join dim_cartao dc
-    on p.id_cartao = dc.id_cartao
+    on h.CreditCardID = dc.id_cartao
 left join dim_cliente cli
-    on p.id_cliente = cli.id_cliente
+    on h.CustomerID = cli.id_cliente
+group by
+    v.id_pedido, h.Status, v.data_pedido, dc.tipo_cartao,
+    d.ano, d.mes, d.dia,
+    cli.id_pessoa, cli.id_territorio, cli.linha1, cli.cidade,
+    cli.nome_provincia, cli.nome_pais
