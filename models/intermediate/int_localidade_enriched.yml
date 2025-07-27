@@ -1,0 +1,23 @@
+  models:
+  - name: int_localidade_enriched
+    description: >
+      Modelo intermediário que une dados de endereço, província e país.
+      Utilizado para compor a dimensão geográfica de localidade.
+    columns:
+      - name: id_endereco
+        description: Identificador único do endereço.
+        tests:
+          - unique
+          - not_null
+
+      - name: linha1
+        description: Linha principal ou rua do endereço.
+
+      - name: cidade
+        description: Cidade da localidade.
+
+      - name: nome_provincia
+        description: Nome do estado ou província.
+
+      - name: nome_pais
+        description: País correspondente à localidade.

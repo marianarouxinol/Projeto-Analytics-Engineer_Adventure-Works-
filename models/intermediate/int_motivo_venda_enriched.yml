@@ -1,0 +1,17 @@
+models:
+  - name: int_motivo_venda_enriched
+    description: >
+      Modelo intermediário que prepara os dados dos motivos comerciais.
+      Aplicado em dimensões e análises de performance de campanha.
+    columns:
+      - name: id_motivo
+        description: Identificador único do motivo comercial.
+        tests:
+          - unique
+          - not_null
+
+      - name: motivo
+        description: Nome do motivo atribuído aos pedidos.
+
+      - name: tipo_motivo
+        description: "Categoria do motivo (ex: Marketing, Other)."

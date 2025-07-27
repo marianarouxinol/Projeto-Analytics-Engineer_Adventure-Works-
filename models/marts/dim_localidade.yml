@@ -1,0 +1,23 @@
+models:
+  - name: dim_localidade
+    description: >
+      Dimensão geográfica contendo dados de endereço, cidade, estado e país dos clientes.
+      Ideal para análises regionais e localização de vendas.
+    columns:
+      - name: id_endereco
+        description: Chave primária do endereço.
+        tests:
+          - unique
+          - not_null
+
+      - name: linha1
+        description: Logradouro ou linha principal do endereço.
+
+      - name: cidade
+        description: Cidade da localidade.
+
+      - name: estado
+        description: Nome do estado ou província.
+
+      - name: pais
+        description: Nome do país.

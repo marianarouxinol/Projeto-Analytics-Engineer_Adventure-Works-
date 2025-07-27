@@ -1,0 +1,17 @@
+models:
+  - name: dim_motivo_venda
+    description: >
+      Dimensão com os motivos comerciais atribuídos aos pedidos.
+      Útil para análises de performance de campanhas e ações promocionais.
+    columns:
+      - name: id_motivo
+        description: Chave primária do motivo.
+        tests:
+          - unique
+          - not_null
+
+      - name: motivo
+        description: Nome do motivo comercial.
+
+      - name: tipo_motivo
+        description: Categoria do motivo.

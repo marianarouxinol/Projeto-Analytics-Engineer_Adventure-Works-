@@ -1,0 +1,32 @@
+models:
+  - name: dim_cliente
+    description: >
+      Dimensão de clientes que realizaram pedidos no sistema.
+      Contém informações pessoais, territoriais e de localização do cliente.
+    columns:
+      - name: id_cliente
+        description: Identificador único do cliente.
+        tests:
+          - unique
+          - not_null
+
+      - name: id_pessoa
+        description: Identificador da pessoa vinculada ao cliente.
+
+      - name: id_loja
+        description: Loja responsável pelo atendimento do cliente.
+
+      - name: id_territorio
+        description: Território comercial do cliente.
+
+      - name: linha1
+        description: Endereço principal do cliente.
+
+      - name: cidade
+        description: Cidade de residência.
+
+      - name: nome_provincia
+        description: Estado ou província.
+
+      - name: nome_pais
+        description: País do cliente.

@@ -1,0 +1,23 @@
+models:
+  - name: int_vendedores_enriched
+    description: >
+      Modelo intermediário que une dados de vendedores, território e país.
+      Serve de base para a dimensão de vendedor e análises por área comercial.
+    columns:
+      - name: id_vendedor
+        description: Identificador do vendedor.
+
+      - name: nome_vendedor
+        description: Nome completo do vendedor.
+
+      - name: id_territorio
+        description: Código do território comercial.
+
+      - name: nome_territorio
+        description: Nome do território de atuação.
+
+      - name: grupo_territorio
+        description: Agrupamento regional do território.
+
+      - name: pais
+        description: País vinculado ao território.

@@ -1,0 +1,29 @@
+models:
+  - name: int_datas_enriched
+    description: >
+      Modelo intermediário com granularidade diária e atributos temporais derivados.
+      É a base da dimensão de data, permitindo análises sazonais e comparativas.
+    columns:
+      - name: data_id
+        description: Identificador único da data no formato YYYY-MM-DD.
+
+      - name: ano
+        description: Ano da data.
+
+      - name: mes
+        description: Mês da data.
+
+      - name: dia
+        description: Dia do mês.
+
+      - name: trimestre
+        description: Trimestre da data.
+
+      - name: dia_semana
+        description: Dia da semana.
+
+      - name: fim_de_semana
+        description: Indica se a data é sábado ou domingo.
+
+      - name: feriado
+        description: Indica se a data é feriado nacional.

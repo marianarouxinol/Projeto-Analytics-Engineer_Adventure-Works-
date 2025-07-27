@@ -5,12 +5,15 @@ sources:
     database: FEA25_05
     schema: RAW_ADVENTURE_WORKS
     tables:
+
       - name: SALES_CUSTOMER
         description: "Clientes registrados na base de vendas"
         columns:
           - name: CustomerID
             description: "Identificador único do cliente"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: PersonID
             description: "Referência à pessoa física ou jurídica"
           - name: StoreID
@@ -23,7 +26,9 @@ sources:
         columns:
           - name: ProductID
             description: "Identificador único do produto"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome do produto"
           - name: ProductSubcategoryID
@@ -36,19 +41,24 @@ sources:
         columns:
           - name: ProductSubcategoryID
             description: "Identificador único da subcategoria"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome da subcategoria"
           - name: ProductCategoryID
             description: "Chave que conecta à categoria do produto"
-            data_tests: [not_null]
+            tests:
+              - not_null
 
       - name: PRODUCTION_PRODUCTCATEGORY
         description: "Categorias principais dos produtos fabricados"
         columns:
           - name: ProductCategoryID
             description: "Identificador único da categoria"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome da categoria"
 
@@ -57,7 +67,9 @@ sources:
         columns:
           - name: BusinessEntityID
             description: "ID único do vendedor"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: TerritoryID
             description: "Território em que atua"
           - name: Bonus
@@ -68,7 +80,9 @@ sources:
         columns:
           - name: TerritoryID
             description: "Identificador único do território"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome do território comercial"
           - name: CountryRegionCode
@@ -81,10 +95,13 @@ sources:
         columns:
           - name: SalesOrderID
             description: "Código do pedido de venda"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: CustomerID
             description: "Cliente responsável pelo pedido"
-            data_tests: [not_null]
+            tests:
+              - not_null
           - name: OrderDate
             description: "Data em que a ordem foi realizada"
           - name: SubTotal
@@ -93,16 +110,44 @@ sources:
             description: "Valor total da venda com encargos"
           - name: Status
             description: "Situação atual do pedido"
+          - name: CreditCardID
+            description: "Cartão de crédito utilizado"
+
+      - name: SALES_SALESORDERDETAIL
+        description: "Itens individuais contidos em cada pedido de venda"
+        columns:
+          - name: SalesOrderID
+            description: "Código do pedido de venda ao qual o item pertence"
+            tests:
+              - not_null
+          - name: SalesOrderDetailID
+            description: "Identificador único do item dentro do pedido"
+            tests:
+              - not_null
+              - unique
+          - name: ProductID
+            description: "Produto vendido nesse item"
+          - name: OrderQty
+            description: "Quantidade solicitada do produto"
+          - name: UnitPrice
+            description: "Preço unitário do produto vendido"
 
       - name: SALES_SALESORDERHEADERSALESREASON
         description: "Relação entre pedidos e seus motivos comerciais"
+        columns:
+          - name: SalesOrderID
+            description: "Pedido vinculado ao motivo comercial"
+          - name: SalesReasonID
+            description: "Motivo atribuído ao pedido"
 
       - name: SALES_SALESREASON
         description: "Motivos atribuídos às vendas"
         columns:
           - name: SalesReasonID
             description: "ID do motivo comercial"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Descrição do motivo"
 
@@ -111,25 +156,39 @@ sources:
         columns:
           - name: CreditCardID
             description: "Identificador único do cartão"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
+          - name: CardType
+            description: "Tipo ou bandeira do cartão"
+          - name: ExpMonth
+            description: "Mês de validade"
+          - name: ExpYear
+            description: "Ano de validade"
 
       - name: PERSON_ADDRESS
         description: "Endereços registrados para os clientes"
         columns:
           - name: AddressID
             description: "ID do endereço"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: AddressLine1
             description: "Endereço principal"
           - name: City
             description: "Cidade"
+          - name: StateProvinceID
+            description: "ID da província associada"
 
       - name: PERSON_STATEPROVINCE
         description: "Provincias vinculadas aos endereços"
         columns:
           - name: StateProvinceID
             description: "ID da província"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome da província"
           - name: CountryRegionCode
@@ -140,29 +199,107 @@ sources:
         columns:
           - name: CountryRegionCode
             description: "Código único do país"
-            data_tests: [unique, not_null]
+            tests:
+              - not_null
+              - unique
           - name: Name
             description: "Nome do país"
 
-
 models:
-  - name: dim_data
-    description: "Dimensão de datas com granularidade diária, trimestre, dia da semana e fim de semana."
+  - name: stg_erp__clientes
+    description: >
+      Staging dos clientes provenientes do sistema ERP, contendo referências a pessoas, lojas e territórios.
     columns:
-      - name: data_id
-        description: "Chave primária da data."
-        tests:
-          - not_null
-          - unique
-      - name: ano
-        description: "Ano da data."
-      - name: mes
-        description: "Mês da data."
-      - name: dia
-        description: "Dia da data."
-      - name: trimestre
-        description: "Trimestre da data."
-      - name: dia_semana
-        description: "Dia da semana."
-      - name: fim_de_semana
-        description: "Flag indicando fim de semana."
+      - name: id_cliente
+        description: "Identificador único do cliente."
+      - name: id_pessoa
+        description: "Referência à pessoa vinculada."
+      - name: id_loja
+        description: "Loja associada ao cliente."
+      - name: id_territorio
+        description: "Território comercial do cliente."
+
+  - name: stg_erp__cartao
+    description: >
+      Staging dos cartões utilizados nas transações comerciais, com informações de tipo e validade.
+    columns:
+      - name: id_cartao
+        description: "Identificador do cartão de crédito."
+      - name: tipo_cartao
+        description: "Bandeira ou tipo do cartão (ex: Visa, MasterCard)."
+      - name: mes_expiracao
+        description: "Mês de vencimento do cartão."
+      - name: ano_expiracao
+        description: "Ano de vencimento do cartão."
+
+  - name: stg_erp__pedidos
+    description: >
+      Staging dos pedidos registrados no sistema ERP, com informações financeiras e relacionamentos chave.
+    columns:
+      - name: id_pedido
+        description: "Identificador único do pedido."
+      - name: id_cliente
+        description: "Cliente responsável pelo pedido."
+      - name: data_pedido
+        description: "Data em que o pedido foi realizado."
+      - name: id_cartao
+        description: "Cartão utilizado na transação."
+      - name: valor_bruto
+        description: "Subtotal bruto do pedido."
+      - name: valor_total
+        description: "Valor final após encargos."
+      - name: status_pedido
+        description: "Status atual do pedido (ex: processado, cancelado)."
+
+  - name: stg_erp__motivo_venda
+    description: >
+      Staging com os motivos comerciais cadastrados no sistema ERP, aplicáveis a campanhas ou ações de venda.
+    columns:
+      - name: id_motivo
+        description: "Identificador único do motivo comercial."
+      - name: motivo
+        description: "Nome do motivo."
+      - name: tipo_motivo
+        description: "Categoria do motivo (ex: Marketing, Other)."
+
+  - name: stg_erp__motivos_pedido
+    description: >
+      Staging de relacionamento N:N entre pedidos e motivos comerciais.
+    columns:
+      - name: id_pedido
+        description: "Pedido associado ao motivo."
+      - name: id_motivo
+        description: "Motivo comercial vinculado ao pedido."
+
+  - name: stg_erp__enderecos
+    description: >
+      Staging de endereços registrados no ERP, com informações de localização.
+    columns:
+      - name: id_endereco
+        description: "Identificador do endereço."
+      - name: linha1
+        description: "Rua ou logradouro principal."
+      - name: cidade
+        description: "Cidade associada ao endereço."
+      - name: id_provincia
+        description: "Chave da província vinculada."
+
+  - name: stg_erp__provincia
+    description: >
+      Staging de províncias ou estados vinculados aos endereços.
+    columns:
+      - name: id_provincia
+        description: "Identificador da província."
+      - name: nome_provincia
+        description: "Nome da província ou estado."
+      - name: codigo_pais
+        description: "Código do país correspondente."
+
+  - name: stg_erp__pais
+    description: >
+      Staging dos países cadastrados no sistema ERP.
+    columns:
+      - name: codigo_pais
+        description: "Código oficial do país."
+      - name: nome_pais
+        description: "Nome completo do país."

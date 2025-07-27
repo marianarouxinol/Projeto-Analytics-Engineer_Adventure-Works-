@@ -1,0 +1,20 @@
+models:
+  - name: int_cartao_enriched
+    description: >
+      Modelo intermediário que prepara os dados dos cartões de crédito utilizados em pedidos.
+      Inclui formatações, atributos técnicos e dados padronizados para uso em dimensões e fatos.
+    columns:
+      - name: id_cartao
+        description: Identificador único do cartão.
+
+      - name: tipo_cartao
+        description: Bandeira ou tipo do cartão.
+
+      - name: mes_expiracao
+        description: Mês de validade do cartão.
+
+      - name: ano_expiracao
+        description: Ano de validade do cartão.
+
+      - name: validade_formatada
+        description: Validade em formato MM/AAAA para exibição.

@@ -1,0 +1,26 @@
+models:
+  - name: int_produto_enriched
+    description: >
+      Modelo intermediário que junta produto, subcategoria e categoria.
+      Utilizado para montar a dimensão de produto com atributos hierárquicos comerciais.
+    columns:
+      - name: id_produto
+        description: Identificador único do produto.
+
+      - name: nome_produto
+        description: Nome completo do produto.
+
+      - name: linha_produto
+        description: Linha ou família de produtos.
+
+      - name: classe_produto
+        description: Classificação comercial ou técnica do produto.
+
+      - name: id_subcategoria
+        description: Chave da subcategoria de produto.
+
+      - name: nome_subcategoria
+        description: Nome da subcategoria.
+
+      - name: nome_categoria
+        description: Nome da categoria principal.
