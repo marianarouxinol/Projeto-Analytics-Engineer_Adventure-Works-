@@ -62,15 +62,8 @@ Testes aplicados via dbt para garantir confiabilidade:
 - 🔹 `not_null` nos campos obrigatórios
 - 🔹 `relationships` entre fatos e dimensões
 
----
 
 
-Execução do Projeto: 
-
--pip install dbt-snowflake
--dbt run
--dbt test
--dbt docs generate && dbt docs serve
 
 
 
