@@ -66,9 +66,11 @@ Testes aplicados via dbt para garantir confiabilidade:
 
 
 Execução do Projeto: 
-pip install dbt-snowflake
-dbt run
-dbt test
-dbt docs generate && dbt docs serve
+
+-pip install dbt-snowflake
+-dbt run
+-dbt test
+-dbt docs generate && dbt docs serve
+
 
 
