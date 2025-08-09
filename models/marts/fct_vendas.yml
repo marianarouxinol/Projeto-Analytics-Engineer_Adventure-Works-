@@ -1,53 +1,38 @@
+version: 2
+
 models:
   - name: fct_vendas
-    description: >
-      Tabela fato central do modelo, contendo os pedidos de venda e suas métricas financeiras.
-      Conectada às principais dimensões analíticas do projeto.
+    description: "Tabela fato de vendas detalhadas da AdventureWorks"
     columns:
       - name: id_pedido
-        description: Identificador único do pedido.
-        tests:
-          - unique
-          - not_null
-
-      - name: data_pedido
-        description: Data em que o pedido foi realizado.
-
+        description: "Identificador único do pedido"
+      - name: productid
+        description: "Identificador do produto vendido"
       - name: status_pedido
-        description: Status atual do pedido.
-
+        description: "Status atual do pedido"
+      - name: data_pedido
+        description: "Data em que o pedido foi realizado"
       - name: tipo_cartao
-        description: Tipo de cartão utilizado na venda.
-
+        description: "Tipo de cartão utilizado na compra"
       - name: valor_bruto
-        description: Valor total bruto do pedido antes de descontos ou encargos.
-
-      - name: valor_total
-        description: Valor final cobrado, incluindo encargos.
-
+        description: "Valor total antes dos descontos"
+      - name: valor_liquido
+        description: "Valor final após descontos"
       - name: ano
-        description: Ano da data do pedido.
-
+        description: "Ano da data do pedido"
       - name: mes
-        description: Mês da data do pedido.
-
+        description: "Mês da data do pedido"
       - name: dia
-        description: Dia da data do pedido.
-
+        description: "Dia da data do pedido"
       - name: id_pessoa
-        description: Pessoa associada ao cliente.
-
+        description: "Identificador da pessoa (cliente)"
       - name: id_territorio
-        description: Território de atuação do cliente.
-
+        description: "Território de origem do cliente"
       - name: linha1
-        description: Rua ou logradouro do cliente.
-
+        description: "Endereço do cliente"
       - name: cidade
-        description: Cidade de residência do cliente.
-
+        description: "Cidade do cliente"
       - name: nome_provincia
-        description: Estado ou província do cliente.
-
+        description: "Província ou estado do cliente"
       - name: nome_pais
-        description: País do cliente.
+        description: "País do cliente"

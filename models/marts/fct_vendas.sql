@@ -33,6 +33,7 @@ dim_localidade as (
 
 select
     v.id_pedido,
+    v.ProductID,  -- ← Adicionado aqui
     h.Status as status_pedido,
     v.data_pedido,
     dc.tipo_cartao,
@@ -48,16 +49,19 @@ select
     cli.nome_provincia,
     cli.nome_pais
 from vendas_detalhadas v
-join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
-  on v.id_pedido = h.SalesOrderID
-left join dim_data d
-    on v.data_pedido = d.data_id
-left join dim_cartao dc
-    on h.CreditCardID = dc.id_cartao
-left join dim_cliente cli
-    on h.CustomerID = cli.id_cliente
+...
 group by
-    v.id_pedido, h.Status, v.data_pedido, dc.tipo_cartao,
-    d.ano, d.mes, d.dia,
-    cli.id_pessoa, cli.id_territorio, cli.linha1, cli.cidade,
-    cli.nome_provincia, cli.nome_pais
+    v.id_pedido,
+    v.ProductID,  -- ← Adicionado aqui também
+    h.Status,
+    v.data_pedido,
+    dc.tipo_cartao,
+    d.ano,
+    d.mes,
+    d.dia,
+    cli.id_pessoa,
+    cli.id_territorio,
+    cli.linha1,
+    cli.cidade,
+    cli.nome_provincia,
+    cli.nome_pais
