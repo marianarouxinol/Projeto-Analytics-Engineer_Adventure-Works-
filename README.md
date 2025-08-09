@@ -10,8 +10,6 @@ Este projeto simula a arquitetura de dados da empresa fictícia **Adventure Work
 
 O projeto segue uma modelagem estrela com uma tabela fato central e múltiplas dimensões relacionadas.
 
-![Esquema Dimensional](esquema_dimensional.png)
-
 <h3 align="center">Esquema Dimensional</h3>
 
 <p align="center">
@@ -72,4 +70,5 @@ pip install dbt-snowflake
 dbt run
 dbt test
 dbt docs generate && dbt docs serve
+
 
