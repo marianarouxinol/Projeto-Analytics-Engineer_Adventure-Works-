@@ -6,7 +6,7 @@ models:
     columns:
       - name: id_pedido
         description: "Identificador único do pedido"
-      - name: productid
+      - name: ProductID
         description: "Identificador do produto vendido"
       - name: status_pedido
         description: "Status atual do pedido"
