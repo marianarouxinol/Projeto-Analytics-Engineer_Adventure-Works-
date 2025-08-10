@@ -15,7 +15,7 @@ with vendas_detalhadas as (
     from RAW_ADVENTURE_WORKS.SALES_SALESORDERDETAIL sd
     join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
       on sd.SalesOrderID = h.SalesOrderID
-    where extract(year from h.OrderDate) = 2011  
+    where extract(year from h.OrderDate) = 2011
 ),
 
 dim_cliente as (
@@ -31,7 +31,6 @@ dim_data as (
 ),
 
 dim_produto as (
-    -- usa sua dimensão já padronizada (initcap e tipos)
     select
         id_produto,
         nome_produto,
@@ -79,4 +78,11 @@ group by
     v.data_pedido,
     dc.tipo_cartao,
     d.ano,
-   
+    d.mes,
+    d.dia,
+    cli.id_pessoa,
+    cli.id_territorio,
+    cli.linha1,
+    cli.cidade,
+    cli.nome_provincia,
+    cli.nome_pais
