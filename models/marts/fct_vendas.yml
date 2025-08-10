@@ -6,8 +6,14 @@ models:
     columns:
       - name: id_pedido
         description: "Identificador único do pedido"
-      - name: ProductID
+      - name: id_produto
         description: "Identificador do produto vendido"
+      - name: nome_produto
+        description: "Nome do produto vendido"
+      - name: nome_subcategoria
+        description: "Subcategoria do produto vendido"
+      - name: nome_categoria
+        description: "Categoria do produto vendido"
       - name: status_pedido
         description: "Status atual do pedido"
       - name: data_pedido
