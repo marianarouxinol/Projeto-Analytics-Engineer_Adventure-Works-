@@ -18,6 +18,8 @@ models:
         description: "Valor total antes dos descontos"
       - name: valor_liquido
         description: "Valor final após descontos"
+      - name: quantidade_comprada
+        description: "Quantidade total de itens comprados no pedido"
       - name: ano
         description: "Ano da data do pedido"
       - name: mes

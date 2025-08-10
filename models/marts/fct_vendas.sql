@@ -6,7 +6,7 @@ with vendas_detalhadas as (
         h.Status                            as status_pedido,
         sd.ProductID,
         sd.SpecialOfferID,
-        sd.OrderQty,
+        sd.OrderQty,  -- ✅ quantidade comprada
         cast(sd.UnitPrice as numeric(20,4)) as unit_price,
         cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty as valor_bruto,
         cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty * (1 - sd.UnitPriceDiscount) as valor_liquido,
@@ -38,6 +38,7 @@ select
     dc.tipo_cartao,
     round(sum(v.valor_bruto), 2) as valor_bruto,
     round(sum(v.valor_liquido), 2) as valor_liquido,
+    sum(v.OrderQty) as quantidade_comprada,  -- ✅ nova métrica agregada
     d.ano,
     d.mes,
     d.dia,
