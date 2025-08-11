@@ -19,29 +19,32 @@ O projeto segue uma modelagem estrela com uma tabela fato central e múltiplas d
 
 ### 🧾 Tabela Fato
 
-- id_pedido: Identificador único do pedido
-- id_produto: Identificador do produto vendido
-- nome_produto: Nome do produto
-- nome_subcategoria: Subcategoria do produto
-- nome_categoria: Categoria do produto
-- status_pedido: Status do pedido
-- data_pedido: Data em que o pedido foi realizado
-- tipo_cartao: Tipo de cartão utilizado na compra
-- motivoid: Identificador do motivo da venda
-- motivo_nome: Nome do motivo da venda (ex: promoção, recomendação)
-- tipo_motivo: Tipo do motivo da venda (ex: marketing, relacionamento)
-- valor_bruto: Valor total da venda antes de descontos
-- valor_liquido: Valor total da venda após descontos
-- quantidade_comprada: Quantidade de unidades compradas
-- ano: Ano da data do pedido
-- mes: Mês da data do pedido
-- dia: Dia da data do pedido
-- id_pessoa: Identificador da pessoa que realizou o pedido
-- id_territorio: Identificador do território de vendas
-- linha1: Endereço do cliente (linha 1)
-- cidade: Cidade do cliente
-- nome_provincia: Estado ou província do cliente
-- nome_pais: País do cliente
+- id_pedido
+- id_produto
+- nome_produto
+- nome_subcategoria
+- nome_categoria
+- status_pedido
+- data_pedido
+- tipo_cartao
+- motivoid
+- motivo_nome
+- tipo_motivo
+- valor_bruto
+- valor_liquido
+- quantidade_comprada
+- ano
+- mes
+- dia
+- id_pessoa
+- id_territorio
+- linha1
+- cidade
+- nome_provincia
+- nome_pais
+
+
+
 
 
 
@@ -66,6 +69,7 @@ Testes aplicados via dbt para garantir confiabilidade:
 - 🔹 `unique` nas PKs
 - 🔹 `not_null` nos campos obrigatórios
 - 🔹 `relationships` entre fatos e dimensões
+
 
 
 
