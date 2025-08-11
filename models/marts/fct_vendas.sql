@@ -11,10 +11,13 @@ with vendas_detalhadas as (
         cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty                                         as valor_bruto,
         cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty * (1 - sd.UnitPriceDiscount)            as valor_liquido,
         h.CustomerID                           as id_cliente,
-        h.CreditCardID                         as id_cartao
+        h.CreditCardID                         as id_cartao,
+        mv.SalesReasonID                       as motivoid  
     from RAW_ADVENTURE_WORKS.SALES_SALESORDERDETAIL sd
     join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
       on sd.SalesOrderID = h.SalesOrderID
+    left join FEA25_05.dbt_mrouxinol_int.int_motivo_venda mv
+      on sd.SalesOrderID = mv.SalesOrderID
     where extract(year from h.OrderDate) = 2011
 ),
 
@@ -39,7 +42,7 @@ dim_produto as (
         nome_subcategoria,
         id_categoria,
         nome_categoria
-    from {{ ref('dim_produto') }}
+    from FEA25_05.dbt_mrouxinol_marts.dim_produto
 )
 
 select
@@ -51,6 +54,7 @@ select
     v.status_pedido,
     v.data_pedido,
     dc.tipo_cartao,
+    v.motivoid, 
     round(sum(v.valor_bruto), 2)       as valor_bruto,
     round(sum(v.valor_liquido), 2)     as valor_liquido,
     sum(v.OrderQty)                    as quantidade_comprada,
@@ -77,6 +81,7 @@ group by
     v.status_pedido,
     v.data_pedido,
     dc.tipo_cartao,
+    v.motivoid,  
     d.ano,
     d.mes,
     d.dia,
