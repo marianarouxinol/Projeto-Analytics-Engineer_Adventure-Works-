@@ -20,6 +20,8 @@ models:
         description: "Data em que o pedido foi realizado"
       - name: tipo_cartao
         description: "Tipo de cartão utilizado na compra"
+      - name: motivoid
+        description: "Identificador do motivo de venda associado ao pedido"
       - name: valor_bruto
         description: "Valor total antes dos descontos"
       - name: valor_liquido
