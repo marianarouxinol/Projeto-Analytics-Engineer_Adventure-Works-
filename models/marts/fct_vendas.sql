@@ -12,7 +12,9 @@ with vendas_detalhadas as (
         cast(sd.UnitPrice as numeric(20,4)) * sd.OrderQty * (1 - sd.UnitPriceDiscount)            as valor_liquido,
         h.CustomerID                           as id_cliente,
         h.CreditCardID                         as id_cartao,
-        mv.SalesReasonID                       as motivoid  
+        mv.SalesReasonID                       as motivoid,
+        mv.motivo_nome,
+        mv.tipo_motivo
     from RAW_ADVENTURE_WORKS.SALES_SALESORDERDETAIL sd
     join RAW_ADVENTURE_WORKS.SALES_SALESORDERHEADER h
       on sd.SalesOrderID = h.SalesOrderID
@@ -54,7 +56,9 @@ select
     v.status_pedido,
     v.data_pedido,
     dc.tipo_cartao,
-    v.motivoid, 
+    v.motivoid,
+    v.motivo_nome,
+    v.tipo_motivo,
     round(sum(v.valor_bruto), 2)       as valor_bruto,
     round(sum(v.valor_liquido), 2)     as valor_liquido,
     sum(v.OrderQty)                    as quantidade_comprada,
@@ -81,7 +85,9 @@ group by
     v.status_pedido,
     v.data_pedido,
     dc.tipo_cartao,
-    v.motivoid,  
+    v.motivoid,
+    v.motivo_nome,
+    v.tipo_motivo,
     d.ano,
     d.mes,
     d.dia,
