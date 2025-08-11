@@ -10,11 +10,7 @@ Este projeto simula a arquitetura de dados da empresa fictícia **Adventure Work
 
 O projeto segue uma modelagem estrela com uma tabela fato central e múltiplas dimensões relacionadas.
 
-<h3 align="center">Esquema Dimensional</h3>
-
-<p align="center">
-  <img src="esquema_dimensional.jpg" alt="Esquema Dimensional" width="600"/>
-</p>
+<img width="770" height="823" alt="modelo_conceitual" src="https://github.com/user-attachments/assets/fd14d1c1-2049-4a02-a7f5-dd5974464589" />
 
 <p align="center"><em>Figura 1: Representação visual do modelo dimensional utilizado no projeto.</em></p>
 ---
@@ -23,22 +19,30 @@ O projeto segue uma modelagem estrela com uma tabela fato central e múltiplas d
 
 ### 🧾 Tabela Fato
 
-- `fct_vendas`
-  - `salesorderid`
-  - `customerid`
-  - `productid`
-  - `salespersonid`
-  - `cartao_id`
-  - `motivoid`
-  - `data_id`
-  - `localidade_id`
-  - `orderqty`
-  - `unitprice`
-  - `percentual_desconto`
-  - `valor_desconto`
-  - `valor_bruto`
-  - `valor_liquido`
-  - `status_pedido`
+- - fct_vendas
+- id_pedido
+- id_produto
+- nome_produto
+- nome_subcategoria
+- nome_categoria
+- status_pedido
+- data_pedido
+- tipo_cartao
+- motivoid
+- valor_bruto
+- valor_liquido
+- quantidade_comprada
+- ano
+- mes
+- dia
+- id_pessoa
+- id_territorio
+- linha1
+- cidade
+- nome_provincia
+- nome_pais
+
+
 
 ### 🧱 Dimensões
 
@@ -61,6 +65,7 @@ Testes aplicados via dbt para garantir confiabilidade:
 - 🔹 `unique` nas PKs
 - 🔹 `not_null` nos campos obrigatórios
 - 🔹 `relationships` entre fatos e dimensões
+
 
 
 
