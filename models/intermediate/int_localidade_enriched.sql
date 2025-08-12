@@ -13,7 +13,7 @@ pais as (
 joined as (
     select
         e.id_endereco,
-        e.linha1             as linha1,
+        e.endereco           as endereco,
         e.cidade,
         p.nome_provincia,
         pa.nome_pais

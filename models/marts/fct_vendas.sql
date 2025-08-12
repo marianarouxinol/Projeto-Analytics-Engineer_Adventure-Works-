@@ -67,7 +67,7 @@ select
     d.dia,
     cli.id_pessoa,
     cli.id_territorio,
-    cli.linha1,
+    cli.endereco,
     cli.cidade,
     cli.nome_provincia,
     cli.nome_pais
@@ -93,7 +93,7 @@ group by
     d.dia,
     cli.id_pessoa,
     cli.id_territorio,
-    cli.linha1,
+    cli.endereco,
     cli.cidade,
     cli.nome_provincia,
     cli.nome_pais

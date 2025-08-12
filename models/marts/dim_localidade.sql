@@ -5,7 +5,7 @@ with base as (
 final as (
     select
         id_endereco,
-        initcap(linha1)             as linha1,
+        initcap(endereco)             as endereco,
         initcap(cidade)             as cidade,
         initcap(nome_provincia)     as estado,
         initcap(nome_pais)          as pais
