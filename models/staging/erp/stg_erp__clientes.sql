@@ -7,6 +7,8 @@ with renamed as (
         cast(TerritoryID as int)        as id_territorio
 
     from {{ source('erp', 'SALES_CUSTOMER') }}
+    where PersonID is not null
+
 )
 
 select *
