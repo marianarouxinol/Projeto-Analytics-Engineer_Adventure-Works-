@@ -104,7 +104,6 @@ sources:
             description: "Cliente responsável pelo pedido"
             tests:
               - not_null
-              - unique
           - name: OrderDate
             description: "Data em que a ordem foi realizada"
           - name: SubTotal
