@@ -2,7 +2,7 @@
 
 ## 🎯 Objetivo
 
-Este projeto simula a arquitetura de dados da empresa fictícia **Adventure Works**, com foco na aplicação de boas práticas de engenharia analítica usando **dbt (Data Build Tool)**. O principal objetivo é a modelagem dimensional, construção de pipelines ELT e validação automatizada dos dados.  O objetivo principal é transformar dados brutos em insights confiáveis para suporte à tomada de decisão.
+Este projeto simula a arquitetura de dados da empresa fictícia **Adventure Works**, com foco na aplicação de boas práticas de engenharia analítica usando **dbt (Data Build Tool)**. O principal objetivo é a modelagem dimensional, construção de pipelines ELT e validação automatizada dos dados, transformando dados brutos em insights confiáveis para suporte à tomada de decisão.
 
 ## 🛠️ Ferramentas Utilizadas
 
@@ -131,6 +131,7 @@ O dashboard interativo foi desenvolvido no **Power BI** e responde às principai
 
 <img width="593" height="483" alt="image" src="https://github.com/user-attachments/assets/5070b696-eac1-40b3-8321-dfabd1dbbcca" />
 <img width="596" height="648" alt="image" src="https://github.com/user-attachments/assets/d2447174-edf6-4073-b286-26d2af673aa9" />
+
 
 
 
